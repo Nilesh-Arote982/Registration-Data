@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer/Distributor Registration - Kartavya Seeds</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f5eb;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #6A3C24;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .header-text p {
+            margin: 5px 0 0;
+            font-size: 16px;
+            font-style: italic;
+            color: #f7d6a3;
+        }
+
+        /* Form Container */
+        .form-container {
+            background-color: white;
+            margin: 40px auto;
+            padding: 20px 40px;
+            border-radius: 8px;
+            border: 2px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #6A3C24;
+            font-size: 22px;
+        }
+
+        .form-container label {
+            display: block;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        .form-container input, 
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+
+        .form-container input:focus, 
+        .form-container select:focus {
+            border-color: #6A3C24;
+            outline: none;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #6A3C24;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #5A2E1C;
+        }
+
+        .form-container #responseMessage {
+            text-align: center;
+            color: green;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                text-align: center;
+            }
+
+            .form-container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-text">
+            <h1>Kartavya Seeds</h1>
+            <p>किसान का विकास ही हमारा कर्तव्य</p>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="form-container">
+        <h2>Farmer/Distributor Registration Form</h2>
+        <form id="registrationForm">
+            <label for="role">Select Role:</label>
+            <select id="role" name="role" required>
+                <option value="" disabled selected>Select Farmer or Distributor</option>
+                <option value="Farmer">Farmer</option>
+                <option value="Distributor">Distributor</option>
+            </select>
+
+            <label for="farmerName">Name:</label>
+            <input type="text" id="farmerName" name="farmerName" required>
+
+            <label for="mobileNumber">Mobile Number:</label>
+            <input type="tel" id="mobileNumber" name="mobileNumber" required>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="pincode">Pincode:</label>
+            <input type="text" id="pincode" name="pincode">
+
+            <label for="cropName">Crop Name:</label>
+            <input type="text" id="cropName" name="cropName">
+
+            <label for="requirement">Requirement:</label>
+            <input type="text" id="requirement" name="requirement">
+
+            <label for="remarks">Remarks:</label>
+            <input type="text" id="remarks" name="remarks">
+
+            <button type="submit">Submit</button>
+        </form>
+        <p id="responseMessage"></p>
+    </div>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(this);
+
+            fetch('https://script.google.com/macros/s/AKfycbxauvEKB5j9uO4MtJxwQ0rYD-qlLNBD4q8_0OCAqwdQkD0meqAIfk_kYeWNw6veck4Z/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("responseMessage").innerText = data;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById("responseMessage").innerText = "Error occurred. Please try again.";
+            });
+        });
+    </script>
+</body>
+</html>
